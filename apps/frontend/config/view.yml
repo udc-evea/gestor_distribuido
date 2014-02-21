@@ -6,11 +6,12 @@ default:
     content-type: text/html
 
   metas:
-    #title:        symfony project
-    #description:  symfony project
+    title:        Gestor Distribuido EVEA Chubut
+    description:  Gestión de la Plataforma Distribuida EVEA Chubut
     #keywords:     symfony, project
-    #language:     en
+    language:     es
     #robots:       index, follow
+    viewport:     "width=device-width, initial-scale=1"
 
   stylesheets:    [main.css]
 
