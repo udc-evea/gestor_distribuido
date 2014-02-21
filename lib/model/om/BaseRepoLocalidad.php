@@ -1533,11 +1533,11 @@ abstract class BaseRepoLocalidad extends BaseObject implements Persistent
     /**
      * return the string representation of this object
      *
-     * @return string
+     * @return string The value of the 'localidad' column
      */
     public function __toString()
     {
-        return (string) $this->exportTo(RepoLocalidadPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->getLocalidad();
     }
 
     /**

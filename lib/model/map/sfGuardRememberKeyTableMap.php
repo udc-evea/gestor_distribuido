@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'repo_localidad' table.
+ * This class defines the structure of the 'sf_guard_remember_key' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.lib.model.map
  */
-class RepoLocalidadTableMap extends TableMap
+class sfGuardRememberKeyTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'lib.model.map.RepoLocalidadTableMap';
+    const CLASS_NAME = 'lib.model.map.sfGuardRememberKeyTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,20 +32,16 @@ class RepoLocalidadTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('repo_localidad');
-        $this->setPhpName('RepoLocalidad');
-        $this->setClassname('RepoLocalidad');
+        $this->setName('sf_guard_remember_key');
+        $this->setPhpName('sfGuardRememberKey');
+        $this->setClassname('sfGuardRememberKey');
         $this->setPackage('lib.model');
-        $this->setUseIdGenerator(true);
+        $this->setUseIdGenerator(false);
         // columns
-        $this->addPrimaryKey('id', 'Id', 'INTEGER', true, 10, null);
-        $this->addForeignKey('codigo_provincia', 'CodigoProvincia', 'CHAR', 'repo_provincia', 'id', true, null, '');
-        $this->addColumn('localidad', 'Localidad', 'VARCHAR', true, 100, null);
-        $this->getColumn('localidad', false)->setPrimaryString(true);
-        $this->addColumn('codigoPostal', 'Codigopostal', 'VARCHAR', true, 10, null);
-        $this->addColumn('codigoTelArea', 'Codigotelarea', 'VARCHAR', true, 5, null);
-        $this->addColumn('latitud', 'Latitud', 'DECIMAL', true, 17, null);
-        $this->addColumn('longitud', 'Longitud', 'DECIMAL', true, 17, null);
+        $this->addForeignPrimaryKey('user_id', 'UserId', 'INTEGER' , 'sf_guard_user', 'id', true, 10, null);
+        $this->addColumn('remember_key', 'RememberKey', 'VARCHAR', false, 32, null);
+        $this->addPrimaryKey('ip_address', 'IpAddress', 'VARCHAR', true, 50, null);
+        $this->addColumn('created_at', 'CreatedAt', 'TIMESTAMP', false, null, null);
         // validators
     } // initialize()
 
@@ -54,8 +50,7 @@ class RepoLocalidadTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('RepoProvincia', 'RepoProvincia', RelationMap::MANY_TO_ONE, array('codigo_provincia' => 'id', ), null, null);
-        $this->addRelation('Server', 'Server', RelationMap::ONE_TO_MANY, array('id' => 'repo_localidad_id', ), 'CASCADE', 'CASCADE', 'Servers');
+        $this->addRelation('sfGuardUser', 'sfGuardUser', RelationMap::MANY_TO_ONE, array('user_id' => 'id', ), 'CASCADE', null);
     } // buildRelations()
 
     /**
@@ -73,7 +68,10 @@ class RepoLocalidadTableMap extends TableMap
 ),
             'symfony_behaviors' =>  array (
 ),
+            'symfony_timestampable' =>  array (
+  'create_column' => 'created_at',
+),
         );
     } // getBehaviors()
 
-} // RepoLocalidadTableMap
+} // sfGuardRememberKeyTableMap

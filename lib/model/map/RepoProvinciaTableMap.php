@@ -39,6 +39,7 @@ class RepoProvinciaTableMap extends TableMap
         $this->setUseIdGenerator(false);
         // columns
         $this->addColumn('provincia', 'Provincia', 'VARCHAR', true, 255, null);
+        $this->getColumn('provincia', false)->setPrimaryString(true);
         $this->addPrimaryKey('id', 'Id', 'CHAR', true, null, null);
         // validators
     } // initialize()
