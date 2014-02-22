@@ -13,6 +13,6 @@
  *
  * @package    propel.generator.lib.model
  */
-class sfGuardUserPeer extends BasesfGuardUserPeer
+class sfGuardUserPeer extends PluginsfGuardUserPeer
 {
 }

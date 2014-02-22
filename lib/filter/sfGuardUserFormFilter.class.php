@@ -7,7 +7,7 @@
  * @subpackage filter
  * @author     Your name here
  */
-class sfGuardUserFormFilter extends BasesfGuardUserFormFilter
+class sfGuardUserFormFilter extends PluginsfGuardUserFormFilter
 {
   public function configure()
   {

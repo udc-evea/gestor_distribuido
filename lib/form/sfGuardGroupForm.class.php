@@ -7,7 +7,7 @@
  * @subpackage form
  * @author     Your name here
  */
-class sfGuardGroupForm extends BasesfGuardGroupForm
+class sfGuardGroupForm extends PluginsfGuardGroupForm
 {
   public function configure()
   {

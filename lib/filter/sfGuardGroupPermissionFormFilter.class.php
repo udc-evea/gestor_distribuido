@@ -7,7 +7,7 @@
  * @subpackage filter
  * @author     Your name here
  */
-class sfGuardGroupPermissionFormFilter extends BasesfGuardGroupPermissionFormFilter
+class sfGuardGroupPermissionFormFilter extends PluginsfGuardGroupPermissionFormFilter
 {
   public function configure()
   {

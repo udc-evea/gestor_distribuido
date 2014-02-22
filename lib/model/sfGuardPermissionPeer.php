@@ -13,6 +13,6 @@
  *
  * @package    propel.generator.lib.model
  */
-class sfGuardPermissionPeer extends BasesfGuardPermissionPeer
+class sfGuardPermissionPeer extends PluginsfGuardPermissionPeer
 {
 }

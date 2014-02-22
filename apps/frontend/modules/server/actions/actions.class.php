@@ -9,9 +9,84 @@
  */
 class serverActions extends sfActions
 {
+  public function executeReport(sfWebRequest $request)
+  {
+    $this->forward404Unless($request->isMethod('post'));    
+
+    $hash = $request->getParameter('hash');
+    
+    $server = ServerQuery::create()
+                ->findOneByHash($hash);
+    
+    $this->forward404Unless($server);
+            
+    $server->setUltimoReporte(new Datetime());
+    $server->setUltimoReporteContenido($request->getParameter('report'));
+    $server->actualizarEstadoServicios();
+    $server->save();
+    
+    //$this->getLogger()->err($request->getParameter('report'));
+    
+    return sfView::NONE;
+  }
+  
+  public function executeVerUltimoReporte(sfWebRequest $request)
+  {
+    $server = $this->getRoute()->getObject();
+    $rep = $server->getUltimoReporteContenido() ? nl2br($server->getUltimoReporteContenido()) : "No hay datos.";
+    
+    return $this->renderText($rep);
+  }
+  
+  public function executeReporteInactivos(sfWebRequest $request)
+  {
+    $env = sfConfig::get('sf_environment');
+    $this->forward404Unless($this->desdeServerLocal() || $env == 'dev');
+    
+    try {
+      $inactivos = ServerQuery::create()
+                  ->inactivos()
+                  ->joinWithRepoLocalidad()
+                  ->porLocalidad()
+                  ->find();
+      if(count($inactivos) > 0)
+        $this->mandarMailInactivos($inactivos);
+    } catch(Exception $e) {
+      $this->getLogger()->warning("Error al enviar correo: ".$e->getMessage());
+      return sfView::NONE;
+    }
+    return sfView::NONE;
+  }
+  
+  public function mandarMailInactivos($inactivos)
+  {
+    $config = sfConfig::get('app_mails_serversInactivos');
+    
+    $message = $this->getMailer()->compose();
+    $message->setSubject($config['subject']);
+    $message->setTo($config['to']);
+    $message->setFrom($config['from']);
+    
+    $html = $this->getPartial('servers/mail_inactivos', array('servers' => $inactivos));
+    $message->setBody($html, 'text/html');
+    
+    $this->getMailer()->send($message);
+  }
+  
+  protected function desdeServerLocal()
+  {
+    $origen = $this->getRequest()->getHost();
+    
+    return in_array($origen, array('localhost', '127.0.0.1'));
+  }
+  
+  //<editor-fold desc="metodos de modulo">
   public function executeIndex(sfWebRequest $request)
   {
-    $this->Servers = ServerQuery::create()->find();
+    $this->Servers = ServerQuery::create()
+            ->joinWithRepoLocalidad()
+            ->porLocalidad()
+            ->find();
   }
 
   public function executeNew(sfWebRequest $request)
@@ -70,4 +145,5 @@ class serverActions extends sfActions
       $this->redirect('server/edit?id='.$Server->getId());
     }
   }
+  //</editor-fold>
 }

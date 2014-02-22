@@ -7,7 +7,7 @@
  * @subpackage filter
  * @author     Your name here
  */
-class sfGuardRememberKeyFormFilter extends BasesfGuardRememberKeyFormFilter
+class sfGuardRememberKeyFormFilter extends PluginsfGuardRememberKeyFormFilter
 {
   public function configure()
   {

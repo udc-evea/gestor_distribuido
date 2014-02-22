@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="<?php echo stylesheet_path("bootstrap.min");?>">
         <link rel="stylesheet" href="<?php echo stylesheet_path("bootstrap-theme.min");?>">
         <link rel="stylesheet" href="<?php echo stylesheet_path("main");?>">
-        <script src="js/modernizr-2.6.2.min.js"></script>
+        <script src="<?php echo javascript_path("modernizr-2.6.2.min");?>"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -22,6 +22,7 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
+        <?php include_partial("global/navbar");?>
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12"><?php echo $sf_content ?></div>
@@ -31,5 +32,9 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="<?php echo javascript_path("jquery-1.10.2.min.js");?>><\/script>');</script>
         <script src="<?php echo javascript_path("bootstrap.min");?>"></script>
+        <script src="<?php echo javascript_path("bootbox.min");?>"></script>
+        <script src="<?php echo javascript_path("rails");?>"></script>
+        
+        <?php include_slot("action_js");?>
     </body>
 </html>

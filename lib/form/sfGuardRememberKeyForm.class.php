@@ -7,7 +7,7 @@
  * @subpackage form
  * @author     Your name here
  */
-class sfGuardRememberKeyForm extends BasesfGuardRememberKeyForm
+class sfGuardRememberKeyForm extends PluginsfGuardRememberKeyForm
 {
   public function configure()
   {

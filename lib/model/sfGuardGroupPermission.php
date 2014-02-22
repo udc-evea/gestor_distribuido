@@ -13,6 +13,6 @@
  *
  * @package    propel.generator.lib.model
  */
-class sfGuardGroupPermission extends BasesfGuardGroupPermission
+class sfGuardGroupPermission extends PluginsfGuardGroupPermission
 {
 }

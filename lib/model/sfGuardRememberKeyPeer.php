@@ -13,6 +13,6 @@
  *
  * @package    propel.generator.lib.model
  */
-class sfGuardRememberKeyPeer extends BasesfGuardRememberKeyPeer
+class sfGuardRememberKeyPeer extends PluginsfGuardRememberKeyPeer
 {
 }

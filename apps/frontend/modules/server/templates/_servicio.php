@@ -1,0 +1,1 @@
+<button type="button" class="btn btn-small btn-<?php echo $estado;?>"><?php echo $nombre;?></button>
