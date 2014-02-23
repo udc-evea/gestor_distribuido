@@ -1,0 +1,5 @@
+report:
+  is_secure: false
+
+reporteInactivos:
+  is_secure: false

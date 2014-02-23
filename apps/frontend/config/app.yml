@@ -5,3 +5,9 @@
 all:
   wiki:
     config_servers: https://github.com/udc-evea/gestor_distribuido/wiki/Config.-de-Servidores-Replicados
+
+  mails:
+    serversInactivos:
+      to:                     ing.gmart@gmail.com
+      from:                   noresponder@udc.edu.ar
+      subject:                Problemas de conectividad
