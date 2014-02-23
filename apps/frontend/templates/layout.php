@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="<?php echo stylesheet_path("bootstrap.min.css");?>">
         <link rel="stylesheet" href="<?php echo stylesheet_path("bootstrap-theme.min.css");?>">
         <link rel="stylesheet" href="<?php echo stylesheet_path("main.css");?>">
-        <script src="<?php echo javascript_path("modernizr-2.6.2.min.css");?>"></script>
+        <script src="<?php echo javascript_path("modernizr-2.6.2.min.js");?>"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
