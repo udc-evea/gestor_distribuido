@@ -3,8 +3,8 @@
 
 prod:
   .settings:
-    no_script_name:         true
-    logging_enabled:        false
+    no_script_name:         false
+    logging_enabled:        true
 
 dev:
   .settings:
