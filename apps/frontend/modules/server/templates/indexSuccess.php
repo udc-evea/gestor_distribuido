@@ -1,7 +1,7 @@
 <h1>Lista de Servidores</h1>
 <div class="row">
   <div class="col-md-12">
-    <table class="table table-bordered table-striped table-hover">
+    <table class="table table-bordered table-striped table-hover table-condensed">
       <thead>
         <tr>
           <th>Servidor</th>
@@ -12,7 +12,8 @@
       </thead>
       <tbody>
         <?php foreach ($Servers as $Server): ?>
-        <tr>
+        <?php $class = $Server->getCssClass();?>
+        <tr class="<?php echo $class;?>">
           <td><a href="<?php echo url_for('server/edit?id='.$Server->getId()) ?>"><?php echo $Server->getCompleto() ?></a></td>
           <td><?php include_partial("server/ultima_novedad", array("Server" => $Server));?></td>
           <td>

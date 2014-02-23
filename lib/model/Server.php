@@ -186,7 +186,7 @@ class Server extends BaseServer
   public function getCssClass()
   {
     if($this->estaPerdido())
-      return "error";
+      return "danger";
     
     else if($this->estaDesactualizado())
       return "warning";
