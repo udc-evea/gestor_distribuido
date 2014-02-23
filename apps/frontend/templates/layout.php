@@ -11,10 +11,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="<?php echo stylesheet_path("bootstrap.min");?>">
-        <link rel="stylesheet" href="<?php echo stylesheet_path("bootstrap-theme.min");?>">
-        <link rel="stylesheet" href="<?php echo stylesheet_path("main");?>">
-        <script src="<?php echo javascript_path("modernizr-2.6.2.min");?>"></script>
+        <link rel="stylesheet" href="<?php echo stylesheet_path("bootstrap.min.css");?>">
+        <link rel="stylesheet" href="<?php echo stylesheet_path("bootstrap-theme.min.css");?>">
+        <link rel="stylesheet" href="<?php echo stylesheet_path("main.css");?>">
+        <script src="<?php echo javascript_path("modernizr-2.6.2.min.css");?>"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -31,9 +31,9 @@
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="<?php echo javascript_path("jquery-1.10.2.min.js");?>><\/script>');</script>
-        <script src="<?php echo javascript_path("bootstrap.min");?>"></script>
-        <script src="<?php echo javascript_path("bootbox.min");?>"></script>
-        <script src="<?php echo javascript_path("rails");?>"></script>
+        <script src="<?php echo javascript_path("bootstrap.min.js");?>"></script>
+        <script src="<?php echo javascript_path("bootbox.min.js");?>"></script>
+        <script src="<?php echo javascript_path("rails.js");?>"></script>
         
         <?php include_slot("action_js");?>
     </body>
