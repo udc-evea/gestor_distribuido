@@ -137,7 +137,7 @@ class Server extends BaseServer
   {
     $reporte = $this->getUltimoReporteContenido();
     
-    if(false === strpos($reporte, "EXITO: sincronización moodledata completa"))
+    if(false === strpos($reporte, "EXITO: sincronizacion moodledata completa"))
     {
       $this->setEstadoMoodledata(false);
       return;
@@ -152,7 +152,7 @@ class Server extends BaseServer
   {
     $reporte = $this->getUltimoReporteContenido();
     
-    if(false === strpos($reporte, "EXITO: sincronización de código completa"))
+    if(false === strpos($reporte, "EXITO: sincronizacion de código completa"))
     {
       $this->setEstadoCodigo(false);
       return;
