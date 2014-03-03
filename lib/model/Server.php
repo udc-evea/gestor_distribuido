@@ -152,7 +152,7 @@ class Server extends BaseServer
   {
     $reporte = $this->getUltimoReporteContenido();
     
-    if(false === strpos($reporte, "EXITO: sincronizacion de código completa"))
+    if(false === strpos($reporte, "EXITO: sincronizacion de codigo completa"))
     {
       $this->setEstadoCodigo(false);
       return;
