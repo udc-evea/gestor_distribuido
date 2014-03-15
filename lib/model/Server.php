@@ -102,32 +102,32 @@ class Server extends BaseServer
   public function actualizarEstadoReplicacionBd()
   {
     $reporte = $this->getUltimoReporteContenido();
+    $this->setEstadoReplicacionBd(false);
     
     if(false === strpos($reporte, "Slave_IO_State: Waiting for master to send event"))
     {
-      $this->setEstadoReplicacionBd(false);
       return;
     }
     
     if(false === strpos($reporte, "Slave_IO_Running: Yes"))
     {
-      $this->setEstadoReplicacionBd(false);
       return;
     }
     
     if(false === strpos($reporte, "Slave_SQL_Running: Yes"))
     {
-      $this->setEstadoReplicacionBd(false);
       return;
     }
     
     if(false === strpos($reporte, "Seconds_Behind_Master: 0"))
     {
-      $this->setEstadoReplicacionBd(false);
       return;
     }
     
-    //TODO: comparar las posiciones de los logs en master y slave
+    if($this->estaPerdido())
+    {
+      return;
+    }
     
     $this->setEstadoReplicacionBd(true);
     
@@ -136,14 +136,15 @@ class Server extends BaseServer
   public function actualizarEstadoMoodledata()
   {
     $reporte = $this->getUltimoReporteContenido();
+    $this->setEstadoMoodledata(false);
     
     if(false === strpos($reporte, "EXITO: sincronizacion moodledata completa"))
     {
-      $this->setEstadoMoodledata(false);
       return;
     }
     
-    //TODO: comparar bien las fechas
+    if($this->estaPerdido()) return;
+    
     $this->setEstadoMoodledata(true);
     
   }
@@ -151,14 +152,15 @@ class Server extends BaseServer
   public function actualizarEstadoCodigo()
   {
     $reporte = $this->getUltimoReporteContenido();
+    $this->setEstadoCodigo(false);
     
     if(false === strpos($reporte, "EXITO: sincronizacion de codigo completa"))
     {
-      $this->setEstadoCodigo(false);
       return;
     }
     
-    //TODO: comparar bien las fechas
+    if($this->estaPerdido()) return;
+    
     $this->setEstadoCodigo(true);
   }
   
