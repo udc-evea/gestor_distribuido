@@ -87,6 +87,11 @@ class serverActions extends sfActions
             ->joinWithRepoLocalidad()
             ->porLocalidad()
             ->find();
+    
+    foreach($this->Servers as $server)
+    {
+      $server->actualizarEstadoServicios()->save();
+    }
   }
 
   public function executeNew(sfWebRequest $request)

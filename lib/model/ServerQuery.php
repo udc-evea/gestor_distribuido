@@ -37,7 +37,7 @@ class ServerQuery extends BaseServerQuery {
   public static function getLimiteDeTiempo()
   {
     $ahora  = new DateTime();
-    $limite = $ahora->sub(new DateInterval('PT1H'));
+    $limite = $ahora->sub(new DateInterval('PT2H'));
     return $limite;
   }
 } // ServerQuery

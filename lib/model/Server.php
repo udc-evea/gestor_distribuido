@@ -71,9 +71,16 @@ class Server extends BaseServer
   
   public function estaDesactualizado()
   {
-    return !$this->estaActualizadoReplicacionBd() ||
-            !$this->estaActualizadoMoodledata() ||
-            !$this->estaActualizadoCodigo();
+    return null === $this->estaActualizadoReplicacionBd() ||
+           null === $this->estaActualizadoMoodledata() ||
+           null === $this->estaActualizadoCodigo();
+  }
+  
+  public function tieneAlgunError()
+  {
+    return false === $this->estaActualizadoReplicacionBd() ||
+           false === $this->estaActualizadoMoodledata() ||
+           false === $this->estaActualizadoCodigo();
   }
   
   public function getLimiteDeTiempo()
@@ -97,35 +104,41 @@ class Server extends BaseServer
     
     if($this->getChequearCodigo())
       $this->actualizarEstadoCodigo();
+    
+    return $this;
   }
   
   public function actualizarEstadoReplicacionBd()
   {
     $reporte = $this->getUltimoReporteContenido();
-    $this->setEstadoReplicacionBd(false);
+    
+    if($this->estaPerdido())
+    {
+      $this->setEstadoReplicacionBd(null);
+      return;
+    }
     
     if(false === strpos($reporte, "Slave_IO_State: Waiting for master to send event"))
     {
+      $this->setEstadoReplicacionBd(false);
       return;
     }
     
     if(false === strpos($reporte, "Slave_IO_Running: Yes"))
     {
+      $this->setEstadoReplicacionBd(false);
       return;
     }
     
     if(false === strpos($reporte, "Slave_SQL_Running: Yes"))
     {
+      $this->setEstadoReplicacionBd(false);
       return;
     }
     
     if(false === strpos($reporte, "Seconds_Behind_Master: 0"))
     {
-      return;
-    }
-    
-    if($this->estaPerdido())
-    {
+      $this->setEstadoReplicacionBd(false);
       return;
     }
     
@@ -136,31 +149,38 @@ class Server extends BaseServer
   public function actualizarEstadoMoodledata()
   {
     $reporte = $this->getUltimoReporteContenido();
-    $this->setEstadoMoodledata(false);
-    
-    if(false === strpos($reporte, "EXITO: sincronizacion moodledata completa"))
+        
+    if($this->estaPerdido())
     {
+      $this->setEstadoMoodledata(null);
       return;
     }
     
-    if($this->estaPerdido()) return;
-    
+    if(false === strpos($reporte, "EXITO: sincronizacion moodledata completa"))
+    {
+      $this->setEstadoMoodledata(false);
+      return;
+    }
+
     $this->setEstadoMoodledata(true);
-    
   }
   
   public function actualizarEstadoCodigo()
   {
     $reporte = $this->getUltimoReporteContenido();
-    $this->setEstadoCodigo(false);
     
-    if(false === strpos($reporte, "EXITO: sincronizacion de codigo completa"))
+    if($this->estaPerdido())
     {
+      $this->setEstadoCodigo(null);
       return;
     }
     
-    if($this->estaPerdido()) return;
-    
+    if(false === strpos($reporte, "EXITO: sincronizacion de codigo completa"))
+    {
+      $this->setEstadoCodigo(false);
+      return;
+    }
+
     $this->setEstadoCodigo(true);
   }
   
@@ -168,30 +188,41 @@ class Server extends BaseServer
   {
     if(!$this->getChequearReplicacionBd()) return true;
     
-    return $this->getEstadoReplicacionBd();
+    return true === $this->getEstadoReplicacionBd();
   }
   
   public function estaActualizadoMoodledata()
   {
     if(!$this->getChequearMoodledata()) return true;
     
-    return $this->getEstadoMoodledata();
+    return true === $this->getEstadoMoodledata();
   }
   
   public function estaActualizadoCodigo()
   {
     if(!$this->getChequearCodigo()) return true;
     
-    return $this->getEstadoCodigo();
+    return true === $this->getEstadoCodigo();
   }
   
-  public function getCssClass()
+  public function getCssClassServer()
   {
     if($this->estaPerdido())
       return "danger";
     
     else if($this->estaDesactualizado())
       return "warning";
+    
+    else return "success";
+  }
+  
+  public function getCssClassServicio($valor)
+  {
+    if(null === $valor)
+      return "warning";
+    
+    else if(false === $valor)
+      return "danger";
     
     else return "success";
   }
