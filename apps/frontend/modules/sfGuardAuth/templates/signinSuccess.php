@@ -59,3 +59,11 @@
       }
 
     </style>
+    
+<?php slot("action_js");?>
+    <script>
+      $(function(){
+        $("#signin_username").focus();
+      });
+    </script>
+<?php end_slot();?>
