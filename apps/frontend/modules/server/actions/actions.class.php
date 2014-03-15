@@ -88,10 +88,9 @@ class serverActions extends sfActions
             ->porLocalidad()
             ->find();
     
-    foreach($this->Servers as $server)
-    {
-      $server->actualizarEstadoServicios()->save();
-    }
+    ServerQuery::create()
+            ->inactivos()
+            ->update(array("EstadoMoodledata" => null, "EstadoReplicacionBd" => null, "EstadoCodigo" => null ));
   }
 
   public function executeNew(sfWebRequest $request)
