@@ -1,5 +1,6 @@
 <div class="container">
   <div class="col-md-4 col-md-offset-4">
+    <?php echo image_tag("iso-UDC-lineal.png");?>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Iniciar sesión</h3>
